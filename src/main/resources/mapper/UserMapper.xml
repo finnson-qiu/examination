@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.software.examination.mapper.IUserMapper">
+    <resultMap id="userMap" type="com.software.examination.dto.UserDTO">
+        <result column="user_name" property="userName"/>
+        <result column="password" property="password"/>
+        <result column="name" property="name"/>
+        <result column="id_number" property="idNumber"/>
+        <result column="permission" property="permission"/>
+        <result column="subject" property="subject"/>
+    </resultMap>
+
+    <resultMap id="subjectMap" type="com.software.examination.dto.SubjectDTO">
+        <result column="subject_no" property="subjectNo"/>
+        <result column="subject_Name" property="subjectName"/>
+    </resultMap>
+
+    <select id="selectCount" parameterType="String" resultType="Integer">
+        select count(*) from user where user_name = #{userName}
+    </select>
+
+    <select id="selectUser" resultMap="userMap" parameterType="String">
+        select * from user where user_name = #{userName}
+    </select>
+
+    <insert id="addOneUser" parameterType="com.software.examination.enity.UserDO">
+        insert into user (user_name,password,id_number,permission,subject,name) values (#{userName},#{password},#{idNumber},#{permission},#{subject},#{name});
+    </insert>
+
+    <select id="getAllSub" resultMap="subjectMap">
+        select * from subject;
+    </select>
+
+    <update id="updatePassword" parameterType="com.software.examination.enity.UserDO">
+        UPDATE user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="userName!=null">user_name=#{userName},</if>
+            <if test="password!=null">password=#{password},</if>
+            <if test="name!=null">`name`=#{name},</if>
+            <if test="idNumber!=null">id_number=#{idNumber},</if>
+            <if test="permission!=null">permission=#{permission},</if>
+            <if test="subject!=null">subject=#{subject},</if>
+        </trim>
+        WHERE user_name=#{userName}
+    </update>
+</mapper>
