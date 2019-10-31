@@ -15,7 +15,9 @@ public class UserDTO {
 
     private Integer permission;
 
-    private Integer subject;
+    private Integer subjectNo;
+
+    private String subjectName;
 
     public String getUserName() {
         return userName;
@@ -50,11 +52,11 @@ public class UserDTO {
     }
 
     public Integer getSubject() {
-        return subject;
+        return subjectNo;
     }
 
-    public void setSubject(Integer subject) {
-        this.subject = subject;
+    public void setSubject(Integer subjectNo) {
+        this.subjectNo = subjectNo;
     }
 
     public String getName() {
@@ -63,5 +65,13 @@ public class UserDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
     }
 }

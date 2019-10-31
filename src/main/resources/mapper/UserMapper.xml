@@ -8,7 +8,8 @@
         <result column="name" property="name"/>
         <result column="id_number" property="idNumber"/>
         <result column="permission" property="permission"/>
-        <result column="subject" property="subject"/>
+        <result column="subject_no" property="subjectNo"/>
+        <result column="subject_name" property="subjectName"/>
     </resultMap>
 
     <resultMap id="subjectMap" type="com.software.examination.dto.SubjectDTO">
@@ -20,19 +21,24 @@
         select count(*) from user where user_name = #{userName}
     </select>
 
+    <select id="getUserCount" resultType="Integer">
+        select count(*) from user where permission <![CDATA[!= ]]> 1
+    </select>
+
     <select id="selectUser" resultMap="userMap" parameterType="String">
         select * from user where user_name = #{userName}
     </select>
 
     <insert id="addOneUser" parameterType="com.software.examination.enity.UserDO">
-        insert into user (user_name,password,id_number,permission,subject,name) values (#{userName},#{password},#{idNumber},#{permission},#{subject},#{name});
+        insert into user (user_name,password,id_number,permission,subject_no,name)
+        values (#{userName},#{password},#{idNumber},#{permission},#{subjectNo},#{name});
     </insert>
 
     <select id="getAllSub" resultMap="subjectMap">
         select * from subject;
     </select>
 
-    <update id="updatePassword" parameterType="com.software.examination.enity.UserDO">
+    <update id="updateUserInfo" parameterType="com.software.examination.enity.UserDO">
         UPDATE user
         <trim prefix="set" suffixOverrides=",">
             <if test="userName!=null">user_name=#{userName},</if>
@@ -44,4 +50,14 @@
         </trim>
         WHERE user_name=#{userName}
     </update>
+
+    <select id="selectAllUser" resultMap="userMap" parameterType="Map">
+        select u.user_name,u.password,u.`name`,u.id_number,u.permission,u.subject_no,s.subject_name
+        from subject s,user u
+        where u.permission <![CDATA[!= ]]> 1 and u.subject_no = s.subject_no limit #{currIndex} , #{pageSize}
+    </select>
+
+    <delete id="deleteUser" parameterType="String">
+        delete from user where user_name = #{userName}
+    </delete>
 </mapper>

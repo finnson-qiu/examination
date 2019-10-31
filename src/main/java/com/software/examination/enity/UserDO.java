@@ -5,17 +5,35 @@ package com.software.examination.enity;
  * @date 2019/10/24 10:32
  */
 public class UserDO {
+    /**
+     * 用户名
+     */
     private String userName;
 
+    /**
+     * 密码
+     */
     private String password;
 
+    /**
+     * 用户姓名
+     */
     private String name;
 
+    /**
+     * 用户身份证号
+     */
     private String idNumber;
 
+    /**
+     * 用户权限
+     */
     private Integer permission;
 
-    private Integer subject;
+    /**
+     * 科目编号
+     */
+    private Integer subjectNo;
 
     public String getUserName() {
         return userName;
@@ -50,11 +68,11 @@ public class UserDO {
     }
 
     public Integer getSubject() {
-        return subject;
+        return subjectNo;
     }
 
-    public void setSubject(Integer subject) {
-        this.subject = subject;
+    public void setSubject(Integer subjectNo) {
+        this.subjectNo = subjectNo;
     }
 
     public String getName() {

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author fsqiu
@@ -23,5 +24,11 @@ public interface IUserMapper {
 
     List<SubjectDTO> getAllSub();
 
-    Integer updatePassword(UserDO userDO);
+    Integer updateUserInfo(UserDO userDO);
+
+    List<UserDTO> selectAllUser(Map<String,Integer> myMap);
+
+    Integer deleteUser(String userName);
+
+    Integer getUserCount();
 }

@@ -2,8 +2,10 @@ package com.software.examination.service;
 
 import com.software.examination.dto.SubjectDTO;
 import com.software.examination.dto.UserDTO;
+import com.software.examination.enity.UserDO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author fsqiu
@@ -19,4 +21,14 @@ public interface IUserService {
     Integer validateUser(UserDTO userDTO);
 
     Integer changePassword(UserDTO userDTO);
+
+    UserDTO getUserInfo(UserDTO userDTO);
+
+    List<UserDTO> getAllUser(Map<String,Integer> myData);
+
+    Integer updatePermission(UserDTO userDTO);
+
+    Integer deleteUser(UserDTO userDTO);
+
+    Integer getUserCount();
 }
